@@ -58,9 +58,15 @@
     });
 
     $(".gallery").on("click", ".nav-link", $.fn.mauGallery.methods.filterByTag);
+          $(".gallery").on("click", ".mg-prev", () => {
+          console.log("prev cliqué");
+          });
     $(".gallery").on("click", ".mg-prev", () =>
       $.fn.mauGallery.methods.prevImage(options.lightboxId)
     );
+            $(".gallery").on("click", ".mg-next", () => {
+            console.log("next cliqué");
+            });
     $(".gallery").on("click", ".mg-next", () =>
       $.fn.mauGallery.methods.nextImage(options.lightboxId)
     );
@@ -153,14 +159,25 @@
           index = i ;
         }
       });
-      next =
-        imagesCollection[index] ||
-        imagesCollection[imagesCollection.length - 1];
+      //Code modifié
+        console.log("current index:", index);
+            index = index - 1
+      if (index < 0) {
+        index = imagesCollection.length - 1
+      }
+        console.log("imagesCollection:", imagesCollection);
+        console.log("current index:", index);
+
+      next =imagesCollection[index]
+        // || imagesCollection[imagesCollection.length - 1];
+                                                                   console.log("next image:", $(next).attr("src")); 
       $(".lightboxImage").attr("src", $(next).attr("src"));
     },
     nextImage() {
       let activeImage = null;
       $("img.gallery-item").each(function() {
+                                                        console.log("activeImage src:", $(activeImage).attr("src"));
+                                                        console.log("checking:", $(this).attr("src"));
         if ($(this).attr("src") === $(".lightboxImage").attr("src")) {
           activeImage = $(this);
         }
@@ -192,7 +209,17 @@
           index = i;
         }
       });
-      next = imagesCollection[index] || imagesCollection[0];
+// Code Modifié
+      console.log("current index:", index);
+
+      index = index + 1
+      if (index >= imagesCollection.length) {
+        index = 0
+      }
+      console.log("current index:", index);
+      next = imagesCollection[index] 
+      // || imagesCollection[0];
+      console.log("next image:", $(next).attr("src")); 
       $(".lightboxImage").attr("src", $(next).attr("src"));
     },
     createLightBox(gallery, lightboxId, navigation) {
