@@ -106,6 +106,9 @@ body {
 	border-radius:0 ;
 }
 /* Code ajouté */
+.carousel {
+	background-color: #000;
+}
 .nav-pills .nav-link.active-tag {
 	color: #fff;
 	background-color: #BEB45A;
